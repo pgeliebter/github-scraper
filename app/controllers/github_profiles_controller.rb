@@ -1,6 +1,7 @@
 class GithubProfilesController < ApplicationController
   def index
-    profile = Faraday.get("https://github.com/pgeliebter").body
-    render json: profile
+    commits = GithubProfileScraper.new
+
+    render json: { this_year_commits: commits.this_year_commits, last_week_commits: commits.last_week_commits, this_week_commits: commits.this_week_commits, todays_commits: commits.todays_commits }
   end
 end
